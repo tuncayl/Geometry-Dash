@@ -14,5 +14,7 @@ namespace _game.Signals
         public  UnityAction onFinishLevel=delegate (){  };
         
         public  Func<Vector2> onGetStartPosition= delegate { return default;};
+        
+        public  Func<int> onGetAttempt= delegate { return default;};
     }
 }

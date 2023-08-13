@@ -15,7 +15,8 @@ namespace _game.managers
         [SerializeField] private Vector2 finishPosition;
         
         //private
-        
+                
+        public int attempt=1;
 
         #endregion
 
@@ -48,6 +49,7 @@ namespace _game.managers
         
         private void OnRestartLevel()
         {
+            attempt++;
             CoreGameSignals.Instance.onChangeGameMode.Invoke(GameMode.cube);
             IEnumerator IRestartLevel()
             {
@@ -60,7 +62,7 @@ namespace _game.managers
             StartCoroutine(IRestartLevel());
         }
         
-        
+        private   int OnGetAttempt() => attempt;
         #endregion
 
 
@@ -69,6 +71,7 @@ namespace _game.managers
         private void Subscire()
         {
             LevelSignals.Instance.onRestartLevel += OnRestartLevel;
+            LevelSignals.Instance.onGetAttempt += OnGetAttempt;
 
             LevelSignals.Instance.onGetFinishProgress += OnGetFinishProgress;
             LevelSignals.Instance.onGetStartPosition += OnGetStartPosition;
@@ -77,6 +80,8 @@ namespace _game.managers
         private void UnSubscire()
         {
             LevelSignals.Instance.onRestartLevel -= OnRestartLevel;
+            LevelSignals.Instance.onGetAttempt -= OnGetAttempt;
+
             LevelSignals.Instance.onGetFinishProgress -= OnGetFinishProgress;
             LevelSignals.Instance.onGetStartPosition -= OnGetStartPosition;
 

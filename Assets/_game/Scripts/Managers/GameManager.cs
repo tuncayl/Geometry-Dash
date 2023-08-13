@@ -1,11 +1,14 @@
 ﻿using System;
+using _game._Extentions;
+using _game.Signals;
 using UnityEngine;
 
 namespace _game.managers
 {
-    public sealed class GameManager: MonoBehaviour
+    public  class GameManager: MonoBehaviour
     {
         #region SelfVariables
+
 
         #endregion
 
@@ -32,6 +35,8 @@ namespace _game.managers
 
 
         #region MainMethods
+
+
 
         #endregion
 

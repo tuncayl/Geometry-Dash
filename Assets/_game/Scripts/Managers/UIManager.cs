@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using _game.Enums;
 using _game.Controllers;
 using _game.Signals;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ namespace _game.managers
         #region SelfVariables
         //Serialzefield
         [SerializeField] private List<GameObject> panels;
+        [SerializeField] private TextMeshPro attemptText;
         
         [Header("Buttons")]
         [SerializeField] private Button soundButton;
@@ -75,6 +77,11 @@ namespace _game.managers
             UIPanelController.ClosePanel(UIPanels.gamePanel,panels);
             UIPanelController.OpenPanel(UIPanels.FinishPanel,panels);
         }
+        
+        private void OnLevelRestart()
+        {
+          attemptText.SetText($"Attempt  {LevelSignals.Instance.onGetAttempt.Invoke()+1}");
+        }
         #endregion
 
 
@@ -83,6 +90,7 @@ namespace _game.managers
         private void Subscire()
         {
             LevelSignals.Instance.onFinishLevel += OnFinishLevel;
+            LevelSignals.Instance.onRestartLevel += OnLevelRestart;
 
             
             UISignals.Instance.onOpenPanel += OnOpenPanel;
@@ -96,6 +104,7 @@ namespace _game.managers
         private void UnSubscire()
         {
             LevelSignals.Instance.onFinishLevel -= OnFinishLevel;
+            LevelSignals.Instance.onRestartLevel -= OnLevelRestart;
 
             UISignals.Instance.onOpenPanel -= OnClosePanel;
             soundButton.onClick.RemoveListener(OnSoundButtonHandler);
