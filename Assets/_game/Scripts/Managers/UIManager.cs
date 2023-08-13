@@ -66,13 +66,14 @@ namespace _game.managers
         private void OnPlayerButtonHandler()
         {
             CoreGameSignals.Instance.onPlay.Invoke();
-          
+            UIPanelController.ClosePanel(UIPanels.startPanel,panels);
+            UIPanelController.OpenPanel(UIPanels.gamePanel,panels);
 
         }
         private void OnFinishLevel()
         {
             UIPanelController.ClosePanel(UIPanels.gamePanel,panels);
-            UIPanelController.OpenPanel(UIPanels.FinishPanel,panels);
+            UIPanelController.OpenPanel(UIPanels.gamePanel,panels);
         }
         #endregion
 
