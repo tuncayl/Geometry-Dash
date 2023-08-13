@@ -72,11 +72,11 @@ namespace _game.managers
             isInputOpen = false;
         }
 
-        private void OnRestartLevel()
+        private void OnPlay()
         {
             IEnumerator WaitSecond()
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     yield return null;
                 }
@@ -85,7 +85,9 @@ namespace _game.managers
             }
 
             StartCoroutine(WaitSecond());
-        } 
+        }
+
+        private void OnReadyPlayer() => isInputOpen = true;
 
         #endregion
 
@@ -95,16 +97,17 @@ namespace _game.managers
         private void Subscire()
         {
             IdleSignals.Instance.onPlayerDeath += OnPlayerDead;
-            LevelSignals.Instance.onRestartLevel += OnRestartLevel;
-            CoreGameSignals.Instance.onPlay += OnRestartLevel;
+            IdleSignals.Instance.onPlayerReady += OnReadyPlayer;
+            CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
 
         private void UnSubscire()
         {
             IdleSignals.Instance.onPlayerDeath -= OnPlayerDead;
-            LevelSignals.Instance.onRestartLevel -= OnRestartLevel;
-            CoreGameSignals.Instance.onPlay -= OnRestartLevel;
+            IdleSignals.Instance.onPlayerReady -= OnReadyPlayer;
+
+            CoreGameSignals.Instance.onPlay -= OnPlay;
 
         }
 

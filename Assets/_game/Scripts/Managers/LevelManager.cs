@@ -52,7 +52,9 @@ namespace _game.managers
             IEnumerator IRestartLevel()
             {
                 yield return new WaitForSeconds(2);
-                CoreGameSignals.Instance.onReset?.Invoke();
+                CoreGameSignals.Instance.onReset.Invoke();
+                CoreGameSignals.Instance.onChangeSoundState.Invoke(SoundState.game);
+
             }
 
             StartCoroutine(IRestartLevel());

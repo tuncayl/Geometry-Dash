@@ -13,7 +13,7 @@ namespace _game.Signals
         
         public UnityAction onPlayerDeath = delegate {  };
 
-        
+        public  UnityAction onPlayerReady=delegate {  };
         #endregion
 
     

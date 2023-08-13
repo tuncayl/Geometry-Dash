@@ -19,7 +19,7 @@ namespace _game.controllers
 
         //Serialized
 
-        [SerializeField] public Transform visuals,effects;
+        [SerializeField] public Transform visuals, effects;
         [SerializeField] public GameObject ship;
         [SerializeField] public PlayerData playerData;
 
@@ -46,7 +46,6 @@ namespace _game.controllers
 
         private void Start()
         {
-  
         }
 
         private void OnEnable()
@@ -85,19 +84,31 @@ namespace _game.controllers
             rigidbody2d.simulated = false;
             visuals.gameObject.SetActive(false);
             deadEffect.SetActive(true);
+            CoreGameSignals.Instance.onChangeSoundState.Invoke(SoundState.dead);
             LevelSignals.Instance.onRestartLevel.Invoke();
         }
 
         private void OnReset()
         {
-            
             transform.position = LevelSignals.Instance.onGetStartPosition.Invoke();
             visuals.transform.localRotation = quaternion.identity;
             visuals.gameObject.SetActive(true);
-            rigidbody2d.simulated = true;
             deadEffect.SetActive(false);
-            isDead = false;
 
+
+            IEnumerator IReset()
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    yield return null;
+                }
+
+                rigidbody2d.simulated = true;
+                isDead = false;
+                IdleSignals.Instance.onPlayerReady.Invoke();
+            }
+
+            StartCoroutine(IReset());
         }
 
         private void OnPlay()
@@ -110,16 +121,20 @@ namespace _game.controllers
                 { GameMode.ship, stateMachine.ShipState }
             };
             OnChangeGameMode(GameMode.cube);
-            
+
             visuals.gameObject.SetActive(true);
             effects.gameObject.SetActive(true);
             isDead = false;
         }
-        
+
         private void OnFinishLevel()
         {
+            rigidbody2d.isKinematic = true;
+            rigidbody2d.velocity = Vector2.zero;
             isDead = true;
+
         }
+
         private void OnChangeGameMode(GameMode mode)
         {
             stateMachine.ChangeState(GameModeStates[mode]);
@@ -132,11 +147,9 @@ namespace _game.controllers
 
         private void Subscire()
         {
-          
-
             IdleSignals.Instance.onGetPlayerPosition += onGetPlayerPosition;
             IdleSignals.Instance.onPlayerDeath += onPlayerDeath;
-            
+
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onChangeGameMode += OnChangeGameMode;
@@ -150,9 +163,8 @@ namespace _game.controllers
             IdleSignals.Instance.onGetPlayerPosition -= onGetPlayerPosition;
             IdleSignals.Instance.onPlayerDeath -= onPlayerDeath;
             CoreGameSignals.Instance.onChangeGameMode -= OnChangeGameMode;
-            
-            LevelSignals.Instance.onFinishLevel -= OnFinishLevel;
 
+            LevelSignals.Instance.onFinishLevel -= OnFinishLevel;
         }
 
         #endregion

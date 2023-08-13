@@ -73,7 +73,7 @@ namespace _game.managers
         private void OnFinishLevel()
         {
             UIPanelController.ClosePanel(UIPanels.gamePanel,panels);
-            UIPanelController.OpenPanel(UIPanels.gamePanel,panels);
+            UIPanelController.OpenPanel(UIPanels.FinishPanel,panels);
         }
         #endregion
 

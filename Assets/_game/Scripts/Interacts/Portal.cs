@@ -19,10 +19,12 @@ namespace _game.Interacts
         #endregion
         public void Interact()
         {
-            Debug.Log("QWANJDIQNDIWQ");
             triggerEffect.gameObject.SetActive(true);
             CoreGameSignals.Instance.onChangeGameMode.Invoke(Open?GameMode.ship: GameMode.cube);
-            if(Open is false) LevelSignals.Instance.onFinishLevel.Invoke();
+            if (Open is false)
+            {
+                LevelSignals.Instance.onFinishLevel.Invoke();
+            }
         }
     }
 }
