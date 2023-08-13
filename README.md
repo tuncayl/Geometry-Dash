@@ -13,7 +13,7 @@ I share the source codes of the Geomtery Dash clone  😊.
 *NONE 
 
 ##  Play Browser 
-😱 [https://tuncayl.itch.io/geometery](https://tuncayl.itch.io/geometrydash)
+😱 [tuncayl.itch.io/geometrydash](https://tuncayl.itch.io/geometrydash)
 
 
 ## Clone Game Testing View
