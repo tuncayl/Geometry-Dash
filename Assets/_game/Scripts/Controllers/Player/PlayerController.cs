@@ -114,7 +114,7 @@ namespace _game.controllers
                 { GameMode.cube, stateMachine.CubeState },
                 { GameMode.ship, stateMachine.ShipState }
             };
-            OnChangeGameMode(GameMode.ship);
+            OnChangeGameMode(GameMode.cube);
 
             visuals.gameObject.SetActive(true);
             effects.gameObject.SetActive(true);
