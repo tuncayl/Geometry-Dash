@@ -9,7 +9,8 @@ namespace _game.controllers
 {
     public sealed partial class PlayerController : MonoBehaviour
     {
-
+        // [SerializeField] private Vector2 rightSize;
+        // [SerializeField] private Vector2 rightOffset;
 
         #region SelfVariables
         
@@ -44,6 +45,13 @@ namespace _game.controllers
             }
         }
 
+        private void OnDrawGizmosSelected()
+        {
+            // Gizmos.matrix = transform.localToWorldMatrix;
+            // Gizmos.DrawWireCube(Vector3.zero+(Vector3)rightOffset, rightSize);
+            // Gizmos.DrawWireCube(Vector3.zero+(Vector3)new Vector2(-0.00249f, 0.474f), new Vector2(0.93f, 0.039f));
+
+        }
 
         #endregion
     }

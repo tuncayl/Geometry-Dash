@@ -1,5 +1,6 @@
 ﻿using System;
 using _game._Extentions;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,12 @@ namespace _game.Signals
         public UnityAction onPlayerDeath = delegate {  };
 
         public  UnityAction onPlayerReady=delegate {  };
+        #endregion
+
+        #region Camera
+        public UnityAction<float> onChangeCameraSize=delegate {  };
+        
+
         #endregion
 
     

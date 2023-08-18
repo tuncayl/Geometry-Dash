@@ -35,11 +35,10 @@ public sealed class CameraFollowController : MonoBehaviour
     }
 
 
-    IEnumerator Start()
+    private void Start()
     {
         positionDiff = (Vector3)IdleSignals.Instance.onGetPlayerPosition.Invoke() - transform.position;
 
-       yield return  null;
     }
 
     #endregion
@@ -55,16 +54,11 @@ public sealed class CameraFollowController : MonoBehaviour
     }
 
 
-    private void OnPlay()
-    {
-        isFollow = true;
-    }
-
-    private void OnReset()
-    {
-        transform.position = (Vector3)LevelSignals.Instance.onGetStartPosition.Invoke() - positionDiff;
-    }
-
+    private void OnPlay()=> isFollow = true;
+    
+    private void OnReset()=> transform.position = (Vector3)LevelSignals.Instance.onGetStartPosition.Invoke() - positionDiff;
+    
+    private void OnChangeSize(float val) => GetComponent<Camera>().orthographicSize = val;
 
 
     #endregion
@@ -76,12 +70,14 @@ public sealed class CameraFollowController : MonoBehaviour
     {
         CoreGameSignals.Instance.onPlay += OnPlay;
         CoreGameSignals.Instance.onReset += OnReset;
+        IdleSignals.Instance.onChangeCameraSize += OnChangeSize;
     }
 
     private void UnSubscire()
     {
         CoreGameSignals.Instance.onPlay -= OnPlay;
         CoreGameSignals.Instance.onReset -= OnReset;
+        IdleSignals.Instance.onChangeCameraSize -= OnChangeSize;
 
     }
 

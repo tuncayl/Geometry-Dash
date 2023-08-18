@@ -54,6 +54,7 @@ namespace _game.managers
             IEnumerator IRestartLevel()
             {
                 yield return new WaitForSeconds(2);
+                IdleSignals.Instance.onChangeCameraSize.Invoke(6);
                 CoreGameSignals.Instance.onReset.Invoke();
                 CoreGameSignals.Instance.onChangeSoundState.Invoke(SoundState.game);
 

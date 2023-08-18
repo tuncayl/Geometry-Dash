@@ -21,10 +21,10 @@ namespace _game.Interacts
         {
             triggerEffect.gameObject.SetActive(true);
             CoreGameSignals.Instance.onChangeGameMode.Invoke(Open?GameMode.ship: GameMode.cube);
-            if (Open is false)
-            {
-                LevelSignals.Instance.onFinishLevel.Invoke();
-            }
+            IdleSignals.Instance.onChangeCameraSize.Invoke(Open?8:6);
+
+            if (Open is false)  LevelSignals.Instance.onFinishLevel.Invoke();
+            
         }
     }
 }

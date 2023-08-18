@@ -16,6 +16,9 @@ namespace _game.States
         protected PlayerData playerData => statemachine.Player.playerData;
 
         protected PlayerController player => statemachine.Player;
+        
+        //resualbe data
+        protected float moveSpeed;
 
 
         public GameModeState(GameModeStateMachine gameModeStateMachine)
@@ -25,7 +28,7 @@ namespace _game.States
 
         public virtual void Enter()
         {
-
+            moveSpeed = playerData.moveSpeed;
         }
 
         public virtual void Exit()
@@ -42,20 +45,20 @@ namespace _game.States
 
         protected void Move()
         {
-            rigidbody2d.velocity += (Vector2.right * Time.fixedDeltaTime * playerData.moveSpeed);
+            rigidbody2d.velocity += (Vector2.right * Time.fixedDeltaTime * moveSpeed);
         }
         protected void SpeedControlY()
         {
             float velY = rigidbody2d.velocity.y;
             
-            if (velY> playerData.flySpeed)     rigidbody2d.velocity =new Vector2(rigidbody2d.velocity.x, playerData.flySpeed*1.5F);
+            if (Mathf.Abs(velY)> 15)     rigidbody2d.velocity =new Vector2(rigidbody2d.velocity.x, 15*Mathf.Sign(velY));
 
         }
 
         protected void SpeedControlX()
         {
             float velX= rigidbody2d.velocity.x;
-            if (velX > playerData.moveSpeed) rigidbody2d.velocity = new Vector2(playerData.moveSpeed, rigidbody2d.velocity.y);
+            if (velX > moveSpeed) rigidbody2d.velocity = new Vector2(moveSpeed, rigidbody2d.velocity.y);
 
         }
         protected bool isGround()
@@ -66,8 +69,8 @@ namespace _game.States
 
         protected bool isHitWall()
         {
-            return Physics2D.OverlapBox(position + (Vector3)new Vector2(0.475f, -0.005f),
-                       new Vector2(0.039f, 0.90f), 0, playerData.obstacleLayer, -1, 3)
+            return Physics2D.OverlapBox(position + (Vector3)new Vector2(0.475f, -0.0075f),
+                       new Vector2(0.039f, 0.929f), 0, playerData.obstacleLayer, -1, 3)
                    ||
                    Physics2D.OverlapBox(position + (Vector3)new Vector2(-0.00249f, 0.474f),
                        new Vector2(0.93f, 0.039f), 0, playerData.obstacleLayer, -1, 3);

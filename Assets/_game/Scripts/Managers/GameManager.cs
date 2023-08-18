@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _game.managers
 {
-    public  class GameManager: MonoBehaviour
+    public  sealed class GameManager: MonoBehaviour
     {
         #region SelfVariables
 

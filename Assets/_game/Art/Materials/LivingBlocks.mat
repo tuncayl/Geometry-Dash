@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LivingBlocks
-  m_Shader: {fileID: -6465566751694194690, guid: 4037614c292ed854f9220589d6ecbdc6, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 33939a47054593d44bc67a9fec340968, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -87,10 +87,16 @@ Material:
     - _EnableExternalAlpha: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Speed: 0
+    - _XMulti: 1
+    - _alpha: 1
     m_Colors:
     - _Color: {r: 23.968628, g: 23.968628, b: 23.968628, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _MaxScale: {r: 1, g: 1, b: 1, a: 0}
+    - _MinScale: {r: 1, g: 1, b: 1, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Scale: {r: 2.78, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3612373844109006544
 MonoBehaviour:

@@ -18,8 +18,9 @@ namespace _game.controllers
         #region SelfVariables
 
         //Serialized
-
-        [SerializeField] public Transform visuals, effects;
+        [Header("Referances")] 
+        [SerializeField] public Transform visuals;
+        [SerializeField] public Transform effects;
         [SerializeField] public GameObject ship;
         [SerializeField] public PlayerData playerData;
 
@@ -40,13 +41,6 @@ namespace _game.controllers
 
         #region UnityMethods
 
-        private void Awake()
-        {
-        }
-
-        private void Start()
-        {
-        }
 
         private void OnEnable()
         {
@@ -120,7 +114,7 @@ namespace _game.controllers
                 { GameMode.cube, stateMachine.CubeState },
                 { GameMode.ship, stateMachine.ShipState }
             };
-            OnChangeGameMode(GameMode.cube);
+            OnChangeGameMode(GameMode.ship);
 
             visuals.gameObject.SetActive(true);
             effects.gameObject.SetActive(true);

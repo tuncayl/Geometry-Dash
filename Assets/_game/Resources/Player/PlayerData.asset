@@ -15,9 +15,9 @@ MonoBehaviour:
   <moveSpeed>k__BackingField: 8
   <jumpPower>k__BackingField: 16
   <rotateSpeed>k__BackingField: 360
-  <flySpeed>k__BackingField: 25
-  <flyRotateSpeed>k__BackingField: 4
-  <rotateSmoth>k__BackingField: 50
+  <flySpeed>k__BackingField: 4
+  <flyRotateSpeed>k__BackingField: 6
+  <rotateSmoth>k__BackingField: 40
   <groundLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64

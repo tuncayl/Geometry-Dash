@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using _game.Signals;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class ColorManager : MonoBehaviour
+public sealed class ColorManager : MonoBehaviour
 {
     #region SelfVariables
 
     [SerializeField] private Material[] Materials;
-    Vector4 baseColor;
-    Vector4 offColor;
-    Vector4 currentColor;
+
+    [SerializeField] private Color[] Colors;
+
 
     #endregion
 
@@ -32,6 +33,7 @@ public class ColorManager : MonoBehaviour
 
 
     #region MainMethods
+    
 
     private void Awake()
     {
@@ -39,18 +41,30 @@ public class ColorManager : MonoBehaviour
         {
             Materials[i].SetColor("_Color",Color.blue);
         }
+
+        StartCoroutine(ChangeRandomColor());
+    }
+
+    private IEnumerator ChangeRandomColor()
+    {
+        yield return new WaitForSeconds(15f);
+        Color randomcolor = Colors[Random.Range(0, Colors.Length)];
+        for (int i = 0; i < Materials.Length; i++)
+        {
+            StartCoroutine(ChangeColor(Materials[i],randomcolor,3));
+        }
+
+        yield return null;
+        StartCoroutine(ChangeRandomColor());
     }
      
-    private IEnumerator ColorChange(Material mat,float duration)
+    private IEnumerator ChangeColor(Material mat,Color _color,float duration)
     {
-        float i = 0;
         float counter = 0;
-
         Color _basecolor = mat.GetColor("_Color");
-   
         while (counter < duration) {
             counter += Time.deltaTime;
-            mat.color = Color.Lerp (_basecolor, Color.black, counter / duration);
+            mat.color = Color.Lerp (_basecolor, _color, counter / duration);
             yield return null;
         }
         yield return null;
@@ -61,7 +75,7 @@ public class ColorManager : MonoBehaviour
     {
         for (int i = 0; i < Materials.Length; i++)
         {
-            StartCoroutine(ColorChange(Materials[i], 3));
+            StartCoroutine(ChangeColor(Materials[i], Color.black, 3));
         }
     }
     #endregion

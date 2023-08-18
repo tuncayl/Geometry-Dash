@@ -21,6 +21,7 @@ namespace _game.States
 
         public override void Enter()
         {
+            base.Enter();
             InputSignals.Instance.onGetTouchInput += OnTouchInput;
             rigidbody2d.gravityScale = 5.5F;
 
